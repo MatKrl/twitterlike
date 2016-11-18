@@ -1,0 +1,14 @@
+<div class="title">
+  <h1>Dashboard</h1>
+</div>
+
+<div class="content">
+  Here you can see messages created by you and your friends:
+  <div class="messages-container">
+    <% @messages.each do |message| %>
+      <%= message.content %>
+      <br>
+    <% end %>
+  </div>
+</div>
+

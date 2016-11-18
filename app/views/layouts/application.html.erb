@@ -9,6 +9,22 @@
   </head>
 
   <body>
+    <div class="flash-messages">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+
+    <div class="header">
+      <div class="current-user-info">
+        <% if user_signed_in? %>
+          Logged in as: <%= current_user.email %> |
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+        <% else %>
+          <%= link_to('Login', new_user_session_path) %>
+        <% end %>
+      </div>
+    </div>
+
     <%= yield %>
   </body>
 </html>
