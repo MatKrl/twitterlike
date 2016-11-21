@@ -1,24 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="content-container">
+  <div class="title">
+    <h1>User info:</h1>
+      Email: <b><%= @user.email %></b><br>
+      Username: <b><%= @user.username %></b><br>
+      Full name: <b><%= @user.full_name %></b><br>
+    <br>
+    <h2>User's messages:</h2>
+  </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', root_path %>
+  <div class="content">
+    <div class="messages-container">
+      <% @messages.each do |message| %>
+        <%= render 'message', message: message %>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>

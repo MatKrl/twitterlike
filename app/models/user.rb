@@ -18,4 +18,16 @@ class User < ApplicationRecord
 
   validates :email,    presence: true
   validates :username, presence: true
+
+  def not_blocked_friends
+    friends - blocked_users - blocked_by_users
+  end
+
+  def for_dashboard_user_ids
+    not_blocked_friends.uniq.collect(&:id) << id
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

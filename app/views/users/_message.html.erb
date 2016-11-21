@@ -1,0 +1,6 @@
+<div class="single-message">
+<b><%= link_to message.user.username, message.user %></b> |
+  <%= message.user.created_at.strftime("%Y/%m/%d at %R") %>
+  <br>
+  <%= message.content %>
+</div>

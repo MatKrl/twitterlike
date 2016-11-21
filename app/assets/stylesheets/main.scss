@@ -1,0 +1,53 @@
+.flash-messages .alert {
+  background: red;
+  color: white;
+  padding: 10px;
+}
+
+.flash-messages .notice {
+  background: green;
+  color: white;
+  padding: 10px;
+}
+
+.main-container{
+  width: 80%;
+  margin: auto;
+}
+
+.left-side{
+  width: 70%;
+  float: left;
+}
+
+.right-side{
+  width: 30%;
+  float: right;
+}
+
+.header{
+  height: 40px;
+}
+
+.content-container{
+  padding: 20px;
+  background: #c5c5c5;
+}
+
+.title{
+  margin: 20px;
+}
+
+.content{
+  margin: 20px;
+}
+
+.widget-container{
+  margin-top: 40px;
+}
+
+.widget{
+  margin: 10px;
+  padding: 15px;
+  background: #c5c5c5;
+}

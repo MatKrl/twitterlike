@@ -20,4 +20,4 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  access_denied: "Sorry! You don't have access to this page."

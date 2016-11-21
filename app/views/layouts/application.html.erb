@@ -9,24 +9,68 @@
   </head>
 
   <body>
-    <div class="flash-messages">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
+    <div class="main-container">
+      <%= render 'shared/flash_messages' %>
 
-    <div class="header">
-      <div class="current-user-info">
-        <% if user_signed_in? %>
-          Logged in as: <%= current_user.email %> |
-          <%= link_to('Home', root_path) %> |
-          <%= link_to('Update account', edit_user_registration_path) %> |
-          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-        <% else %>
-          <%= link_to('Login', new_user_session_path) %>
+      <div class="left-side">
+        <div class="header">
+          <div class="current-user-info">
+            <% if user_signed_in? %>
+              Logged in as: <%= current_user.email %> |
+              <%= link_to('Home', root_path) %> |
+              <%= link_to('Update account', edit_user_registration_path) %> |
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            <% else %>
+              <%= link_to('Login', new_user_session_path) %>
+            <% end %>
+          </div>
+        </div>
+
+        <%= yield %>
+      </div>
+
+      <div class="right-side">
+        <% if current_user.present? %>
+          <div class="widget-container">
+            <div class="widget">
+              <h2>Friends:</h2>
+              <table>
+                <% current_user.friends.each do |user| %>
+                  <tr>
+                    <td><%= link_to user.username, user %></td>
+                    <td></td>
+                    <td><%= link_to 'Remove', '' %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+            <div class="widget">
+              <h2>Blocked:</h2>
+              <table>
+                <% current_user.blocked_users.each do |user| %>
+                  <tr>
+                    <td><%= link_to user.username, user %></td>
+                    <td></td>
+                    <td><%= link_to 'Unblock', '' %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+            <div class="widget">
+              <h2>All users:</h2>
+              <table>
+                <% User.all.each do |user| %>
+                  <tr>
+                    <td><%= link_to user.username, user %></td>
+                    <td><%= link_to 'Invite', '' %></td>
+                    <td><%= link_to 'Block', '' %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
-
-    <%= yield %>
   </body>
 </html>
