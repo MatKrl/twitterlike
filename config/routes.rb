@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get 'block'
     get 'unblock'
   end
+  post 'comments/create',  to: "users#create_comment"
+  get  'comments/destroy', to: "users#destroy_comment"
 
   root to: "users#dashboard"
 end

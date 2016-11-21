@@ -1,6 +1,13 @@
-<div class="single-message">
-<b><%= link_to message.user.username, message.user %></b> |
-  <%= message.user.created_at.strftime("%Y/%m/%d at %R") %>
-  <br>
-  <%= message.content %>
+<div class="message-container">
+  <div class="single-message">
+    <b><%= link_to message.user.username, message.user %></b> |
+    <%= message.user.created_at.strftime("%Y/%m/%d at %R") %>
+    <br>
+    <%= message.content %>
+  </div>
+  <%= link_to "Comments", "#", class: "toggle_comments" %>
+  <div class="comments-container">
+    <%= render 'users/comments/new', message: message %>
+    <%= render 'users/comments/list', comments: message.comments %>
+  </div>
 </div>
