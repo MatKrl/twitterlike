@@ -26,11 +26,12 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      @user = current_user
-    end
 
-    def user_params
-      params.require(:user).permit(:email, :username, :first_name, :last_name)
-    end
+  def set_user
+    @user = current_user
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :username, :first_name, :last_name)
+  end
 end
