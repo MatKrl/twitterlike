@@ -4,9 +4,10 @@
   </div>
 
   <div class="content">
+    <%= render 'users/messages/new' %>
     <div class="messages-container">
       <% @messages.each do |message| %>
-        <%= render 'message', message: message %>
+        <%= render 'users/messages/single', message: message %>
         <br>
       <% end %>
     </div>

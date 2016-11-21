@@ -1,0 +1,6 @@
+<div class="message-new">
+  <%= form_tag messages_create_path do %>
+    <%= text_field_tag :content, '', class: "comment-content" %>
+    <%= submit_tag 'Send message' %>
+  <% end %>
+</div>

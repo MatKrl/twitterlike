@@ -52,12 +52,16 @@
   background: #c5c5c5;
 }
 
+.message-new{
+  margin-bottom: 20px;
+}
+
 .comments-container{
   display: none;
   margin-left: 40px
 }
 
-.comment-create .comment-content{
+.comment-content{
   margin-top: 10px;
   width: 80%;
 }

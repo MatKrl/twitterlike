@@ -38,15 +38,15 @@ class UsersController < ApplicationController
     redirect_back_or_default
   end
 
-  def create_comment
-    comment = Comment.new(user: current_user, message_id: params[:message_id], content: params[:content])
-    comment.save
+  def create_message
+    message = Message.new(user: current_user, content: params[:content])
+    message.save
     redirect_back_or_default
   end
 
-  def destroy_comment
-    comment = Comment.find(params[:message_id])
-    comment.destroy if comment.user == current_user
+  def create_comment
+    comment = Comment.new(user: current_user, message_id: params[:message_id], content: params[:content])
+    comment.save
     redirect_back_or_default
   end
 
