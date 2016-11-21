@@ -4,6 +4,8 @@
       Email: <b><%= @user.email %></b><br>
       Username: <b><%= @user.username %></b><br>
       Full name: <b><%= @user.full_name %></b><br>
+      <%= link_to 'Invite', user_invite_path(@user) unless current_user.friends.include?(@user)%> |
+      <%= link_to 'Block', user_block_path(@user) unless current_user.blocked_users.include?(@user) %>
     <br>
     <h2>User's messages:</h2>
   </div>

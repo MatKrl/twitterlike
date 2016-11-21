@@ -1,5 +1,5 @@
 <div class="comment-single">
-  <b><%= link_to comment.user.username, comment.user %></b> |
+  Commented by: <b><%= link_to comment.user.username, comment.user %></b> |
   <%= comment.user.created_at.strftime("%Y/%m/%d at %R") %>
   <br>
   <%= comment.content %>
