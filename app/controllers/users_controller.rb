@@ -1,17 +1,46 @@
 class UsersController < ApplicationController
+  before_filter :set_user, only: [:show, :invite, :uninvite, :block, :unblock]
+
   def dashboard
     @messages = Message.includes(:user).where(messages: { user_id: current_user.for_dashboard_user_ids })
   end
 
   def show
-    @user = User.find(params[:id])
     redirect_to root_path, alert: t('access_denied') if @user.blocked_users.include?(current_user)
-    @messages = Message.where(user_id: @user.id)
+    @messages = Message.includes(:user).where(user_id: @user.id)
+  end
+
+  def invite
+    begin
+      current_user.friends << @user
+    rescue ActiveRecord::RecordInvalid => e
+      message = t('already_invited')
+    end
+    redirect_to_back_or_default(message)
+  end
+
+  def uninvite
+    current_user.friends.destroy(@user)
+    redirect_to_back_or_default
+  end
+
+  def block
+    begin
+      current_user.blocked_users << @user
+    rescue ActiveRecord::RecordInvalid => e
+      message = t('already_blocked')
+    end
+    redirect_to_back_or_default(message)
+  end
+
+  def unblock
+    current_user.blocked_users.destroy(@user)
+    redirect_to_back_or_default
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :username, :first_name, :last_name)
+  def set_user
+    @user = User.find(params[:id] || params[:user_id])
   end
 end

@@ -27,6 +27,10 @@ class User < ApplicationRecord
     not_blocked_friends.uniq.collect(&:id) << id
   end
 
+  def all_other_users
+    User.where.not(id: id)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

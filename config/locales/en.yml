@@ -21,3 +21,7 @@
 
 en:
   access_denied: "Sorry! You don't have access to this page."
+  invited: "User invited successfully."
+  already_invited: "User already invited!"
+  blocked: "User blocked successfully."
+  already_blocked: "User already blocked!"

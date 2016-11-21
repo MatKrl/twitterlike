@@ -39,7 +39,7 @@
                   <tr>
                     <td><%= link_to user.username, user %></td>
                     <td></td>
-                    <td><%= link_to 'Remove', '' %></td>
+                    <td><%= link_to 'Uninvite', user_uninvite_path(user) %></td>
                   </tr>
                 <% end %>
               </table>
@@ -51,7 +51,7 @@
                   <tr>
                     <td><%= link_to user.username, user %></td>
                     <td></td>
-                    <td><%= link_to 'Unblock', '' %></td>
+                    <td><%= link_to 'Unblock', user_unblock_path(user) %></td>
                   </tr>
                 <% end %>
               </table>
@@ -59,11 +59,11 @@
             <div class="widget">
               <h2>All users:</h2>
               <table>
-                <% User.all.each do |user| %>
+                <% current_user.all_other_users.each do |user| %>
                   <tr>
                     <td><%= link_to user.username, user %></td>
-                    <td><%= link_to 'Invite', '' %></td>
-                    <td><%= link_to 'Block', '' %></td>
+                    <td><%= link_to 'Invite', user_invite_path(user) %></td>
+                    <td><%= link_to 'Block', user_block_path(user) %></td>
                   </tr>
                 <% end %>
               </table>
