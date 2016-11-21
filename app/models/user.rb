@@ -15,4 +15,7 @@ class User < ApplicationRecord
 
   has_many :on_user_blockades, class_name: 'Blockade', foreign_key: 'blocked_id'
   has_many :blocked_by_users, through: :on_user_blockades, source: 'user'
+
+  validates :email,    presence: true
+  validates :username, presence: true
 end
