@@ -10,7 +10,7 @@ class Friendship < ApplicationRecord
   private
 
   def create_connected_friendship
-    return false if persisted?
+    return false unless persisted?
     Friendship.where(
       user_id: friend_id,
       friend_id: user_id,

@@ -1,13 +1,25 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+def disp_progres
+  print '.'
+end
+
+def random_user(without_id=nil)
+  if without_id
+    User.where.not(id: without_id).order("RAND()").first
+  else
+    User.order("RAND()").first
+  end
+end
+
+puts "\n\n### Seeds import - start #{'#'*54}\n"
+start_time = Time.now
 
 User.create(email: 'admin@example.com', password: 'password', username: 'Admin', first_name: 'Mat', last_name: 'Krl')
 
+puts "\nCreating users:"
 50.times do |i|
   user = User.create(
     email: FFaker::Internet.safe_email,
@@ -16,19 +28,45 @@ User.create(email: 'admin@example.com', password: 'password', username: 'Admin',
     first_name: FFaker::Name.first_name,
     last_name: FFaker::Name.last_name
   )
+  disp_progres
 end
 
-1000.times do |j|
+puts "\nCreating messages:"
+1000.times do |i|
   message = Message.create(
-    user: User.order("RAND()").first,
-    content: FFaker::Lorem.paragraph
+    user: random_user,
+    content: FFaker::Lorem.paragraph+"_#{i}"
   )
+  disp_progres
 end
 
-3000.times do |j|
+puts "\nCreating comments:"
+3000.times do |i|
   comment = Comment.create(
-    user: User.order("RAND()").first,
+    user: random_user,
     message: Message.order("RAND()").first,
-    content: FFaker::Lorem.paragraph
+    content: FFaker::Lorem.paragraph+"_#{i}"
   )
+  disp_progres
 end
+
+puts "\nCreating friendships:"
+User.all.each do |user|
+  rand(10).times do |i|
+    user.friendships.create(
+      friend: random_user(user.id),
+      status: 'inviting'
+    )
+    disp_progres
+  end
+end
+
+puts "\nCreating blockades:"
+User.all.each do |user|
+  rand(2).times do |i|
+    user.blocked_users << random_user(user.id)
+    disp_progres
+  end
+end
+
+puts "\n\n### Seeds import - finished in #{(Time.now-start_time).round(2)} sec #{'#'*38}\n\n"
