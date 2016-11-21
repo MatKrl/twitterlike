@@ -13,34 +13,39 @@ class UsersController < ApplicationController
   def invite
     begin
       current_user.friends << @user
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid
       message = t('already_invited')
     end
-    redirect_to_back_or_default(message)
+    # debugger
+    redirect_back_or_default(message)
   end
 
   def uninvite
     current_user.friends.destroy(@user)
-    redirect_to_back_or_default
+    redirect_back_or_default
   end
 
   def block
     begin
       current_user.blocked_users << @user
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid
       message = t('already_blocked')
     end
-    redirect_to_back_or_default(message)
+    redirect_back_or_default(message)
   end
 
   def unblock
     current_user.blocked_users.destroy(@user)
-    redirect_to_back_or_default
+    redirect_back_or_default
   end
 
   private
 
   def set_user
     @user = User.find(params[:id] || params[:user_id])
+  end
+
+  def redirect_back_or_default(message = '')
+    redirect_back(fallback_location: root_path, alert: message)
   end
 end
