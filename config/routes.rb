@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     get 'unblock'
   end
 
-  post 'messages/create',  to: "users#create_message"
-  post 'comments/create',  to: "users#create_comment"
+  resources :messages, only: [:create]
+  resources :comments, only: [:create]
 
   root to: "users#dashboard"
 end

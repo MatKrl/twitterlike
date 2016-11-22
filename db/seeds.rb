@@ -20,7 +20,7 @@ start_time = Time.now
 User.create(email: 'admin@example.com', password: 'password', username: 'Admin', first_name: 'Mat', last_name: 'Krl')
 
 puts "\nCreating users:"
-50.times do |i|
+20.times do |i|
   user = User.create(
     email: FFaker::Internet.safe_email,
     password: 'password',
@@ -32,7 +32,7 @@ puts "\nCreating users:"
 end
 
 puts "\nCreating messages:"
-1000.times do |i|
+100.times do |i|
   message = Message.create(
     user: random_user,
     content: FFaker::Lorem.paragraph+"_#{i}"
@@ -41,7 +41,7 @@ puts "\nCreating messages:"
 end
 
 puts "\nCreating comments:"
-3000.times do |i|
+100.times do |i|
   comment = Comment.create(
     user: random_user,
     message: Message.order("RAND()").first,
@@ -52,7 +52,7 @@ end
 
 puts "\nCreating friendships:"
 User.all.each do |user|
-  rand(10).times do |i|
+  rand(3).times do |i|
     user.friendships.create(
       friend: random_user(user.id),
       status: 'inviting'

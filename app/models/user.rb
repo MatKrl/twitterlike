@@ -32,4 +32,12 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def friend_with?(user)
+     friends.include?(user)
+  end
+
+  def blocked?(user)
+    blocked_users.include?(user)
+  end
 end

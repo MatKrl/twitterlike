@@ -1,0 +1,5 @@
+<div class="comments-list">
+  <% comments.each do |comment| %>
+    <%= render 'comments/single', comment: comment unless current_user.blocked?(comment.user) %>
+  <% end %>
+</div>

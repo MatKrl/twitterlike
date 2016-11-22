@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :set_user, only: [:show, :invite, :uninvite, :block, :unblock]
+  before_action :set_user, only: [:show, :invite, :uninvite, :block, :unblock]
 
   def dashboard
     @messages = find_messages(current_user.for_dashboard_user_ids)
@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     begin
       current_user.friends << @user
     rescue ActiveRecord::RecordInvalid
-      message = t('already_invited')
+      info = t('already_invited')
     end
-    redirect_back_or_default(message)
+    redirect_back_or_default(info)
   end
 
   def uninvite
@@ -28,25 +28,13 @@ class UsersController < ApplicationController
     begin
       current_user.blocked_users << @user
     rescue ActiveRecord::RecordInvalid
-      message = t('already_blocked')
+      info = t('already_blocked')
     end
-    redirect_back_or_default(message)
+    redirect_back_or_default(info)
   end
 
   def unblock
     current_user.blocked_users.destroy(@user)
-    redirect_back_or_default
-  end
-
-  def create_message
-    message = Message.new(user: current_user, content: params[:content])
-    message.save
-    redirect_back_or_default
-  end
-
-  def create_comment
-    comment = Comment.new(user: current_user, message_id: params[:message_id], content: params[:content])
-    comment.save
     redirect_back_or_default
   end
 
@@ -60,9 +48,5 @@ class UsersController < ApplicationController
     Message.includes(:user, comments: :user)
            .where(messages: { user_id: user_ids })
            .order('messages.created_at DESC')
-  end
-
-  def redirect_back_or_default(message = '')
-    redirect_back(fallback_location: root_path, alert: message)
   end
 end

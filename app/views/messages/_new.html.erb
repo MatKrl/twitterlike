@@ -1,0 +1,6 @@
+<div class="message-new">
+  <%= form_for(Message.new) do |f| %>
+    <%= f.text_field :content, class: "comment-content" %>
+    <%= f.submit 'Send message' %>
+  <% end %>
+</div>

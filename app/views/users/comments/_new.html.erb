@@ -1,7 +1,0 @@
-<div class="comment-new">
-  <%= form_tag comments_create_path do %>
-    <%= hidden_field_tag :message_id, message.id %>
-    <%= text_field_tag :content, '', class: "comment-content" %>
-    <%= submit_tag 'Comment' %>
-  <% end %>
-</div>

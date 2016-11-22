@@ -25,3 +25,9 @@ en:
   already_invited: "User already invited!"
   blocked: "User blocked successfully."
   already_blocked: "User already blocked!"
+  messages:
+    create:
+      failed: "Message can't be saved."
+  comments:
+    create:
+      failed: "Comment can't be saved."

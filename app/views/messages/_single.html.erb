@@ -7,7 +7,7 @@
   </div>
   <%= link_to "Comments", "#", class: "toggle_comments" %>
   <div class="comments-container">
-    <%= render 'users/comments/list', comments: message.comments %>
-    <%= render 'users/comments/new', message: message %>
+    <%= render 'comments/list', comments: message.comments %>
+    <%= render 'comments/new', message: message %>
   </div>
 </div>
