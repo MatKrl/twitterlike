@@ -2,11 +2,11 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
 
-puts "!!!Database not empty!!!" if User.count > 0
+puts '!!!Database not empty!!!' if User.count > 0
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_girl'
@@ -60,7 +60,7 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
-  # config.filter_gems_from_backtrace("gem name")
+  # config.filter_gems_from_backtrace('gem name')
 
-  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end

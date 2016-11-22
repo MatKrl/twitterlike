@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def friend_with?(user)
-     friends.include?(user)
+    friends.include?(user)
   end
 
   def blocked?(user)
