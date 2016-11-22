@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before(:all) do
+  before(:each) do
     @user1 = create(:user1)
     @user2 = create(:user2)
     @user3 = create(:user3)
@@ -34,5 +34,13 @@ RSpec.describe User, type: :model do
 
   it "return other users" do
     expect(@user1.reload.all_other_users).to eq([@user2, @user3])
+  end
+
+  it "confirm friendship" do
+    expect(@user1.reload.friend_with?(@user2)).to be true
+  end
+
+  it "confirm blockade" do
+    expect(@user1.reload.blocked?(@user3)).to be true
   end
 end

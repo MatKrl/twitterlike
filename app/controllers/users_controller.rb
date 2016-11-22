@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     begin
       current_user.friends << @user
     rescue ActiveRecord::RecordInvalid
-      info = t('already_invited')
+      @info = t('already_invited')
     end
-    redirect_back_or_default(info)
+    redirect_back_or_default(@info)
   end
 
   def uninvite
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
     begin
       current_user.blocked_users << @user
     rescue ActiveRecord::RecordInvalid
-      info = t('already_blocked')
+      @info = t('already_blocked')
     end
-    redirect_back_or_default(info)
+    redirect_back_or_default(@info)
   end
 
   def unblock
