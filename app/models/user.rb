@@ -18,11 +18,8 @@ class User < ApplicationRecord
   validates :username, presence: true
 
   def not_blocked_friends
-    friends - blocked_users - blocked_by_users
-  end
-
-  def for_dashboard_user_ids
-    not_blocked_friends.uniq.collect(&:id) << id
+    blocked_ids = blocked_users.pluck(:id) + blocked_by_users.pluck(:id)
+    friends.where.not(id: blocked_ids)
   end
 
   def all_other_users
@@ -34,10 +31,10 @@ class User < ApplicationRecord
   end
 
   def friend_with?(user)
-    friends.include?(user)
+    friends.exists?(id: user.id)
   end
 
   def blocked?(user)
-    blocked_users.include?(user)
+    blocked_users.exists?(id: user.id)
   end
 end

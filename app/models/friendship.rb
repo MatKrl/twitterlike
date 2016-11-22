@@ -10,7 +10,6 @@ class Friendship < ApplicationRecord
   private
 
   def create_connected_friendship
-    return false unless persisted?
     Friendship.where(
       user_id: friend_id,
       friend_id: user_id,
@@ -19,10 +18,9 @@ class Friendship < ApplicationRecord
   end
 
   def destroy_connected_friendship
-    connected_friendship = Friendship.where(
+    Friendship.where(
       user_id: friend_id,
       friend_id: user_id
-    ).first
-    connected_friendship.destroy if connected_friendship.present?
+    ).delete_all
   end
 end

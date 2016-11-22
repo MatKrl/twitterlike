@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.new(comment_params.merge(user: current_user))
+    comment = current_user.comments.build(comment_params)
     @info = t('comments.create.failed') unless comment.save
     redirect_back_or_default(@info)
   end
