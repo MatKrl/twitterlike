@@ -8,9 +8,9 @@ end
 
 def random_user(without_id=nil)
   if without_id
-    User.where.not(id: without_id).order("RAND()").first
+    User.where.not(id: without_id).order("RANDOM()").first
   else
-    User.order("RAND()").first
+    User.order("RANDOM()").first
   end
 end
 
@@ -44,7 +44,7 @@ puts "\nCreating comments:"
 100.times do |i|
   comment = Comment.create(
     user: random_user,
-    message: Message.order("RAND()").first,
+    message: Message.order("RANDOM()").first,
     content: FFaker::Lorem.paragraph+"_#{i}"
   )
   disp_progres

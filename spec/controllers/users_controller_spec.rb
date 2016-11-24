@@ -38,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
       before { get :dashboard }
 
       it 'assigns @messages' do
-        expect(assigns(:messages).to_a).to eq([message1, message2])
+        expect(assigns(:messages).to_a).to eq([message2, message1])
       end
 
       it 'renders the dashboard template' do
